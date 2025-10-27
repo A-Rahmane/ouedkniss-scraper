@@ -220,4 +220,4 @@ class OuedknissCrawler:
         tasks = [self.crawl_category(cat_url) for cat_url in category_urls[:3]]  # Limit for testing
         await asyncio.gather(*tasks)
         
-        return self.product_urls
+        return self.product_urls 
