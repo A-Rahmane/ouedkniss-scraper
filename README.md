@@ -40,7 +40,7 @@ ouedkniss_scraper/
 
 1. **Clone the repository**
 ```bash
-   git clone <repository-url>
+   git clone https://github.com/A-Rahmane/ouedkniss_py_scraper.get
    cd ouedkniss_scraper
 ```
 
