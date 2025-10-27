@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: ouedkniss_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: ouedkniss_db
+
+  scraper:
+    build: .
+    container_name: ouedkniss_scraper
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/
+      DATABASE_NAME: ouedkniss_db
+    volumes:
+      - ./src:/app/src
+    command: python main.py --mode crawl --max-products 100
+
+  api:
+    build: .
+    container_name: ouedkniss_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/
+      DATABASE_NAME: ouedkniss_db
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+    command: python main.py --mode api
+
+volumes:
+  mongodb_data:
