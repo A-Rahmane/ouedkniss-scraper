@@ -1,4 +1,4 @@
-# Ouedkniss Web Scraper
+# Ouedkniss Web Scraper - under development
 
 A comprehensive, production-ready web scraper for Ouedkniss.com built with Python, featuring asynchronous crawling, MongoDB storage, and a REST API.
 
